@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgba(202, 124, 29, 0.76);
 }
 
 .App-logo {
@@ -35,4 +36,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.itemimage{
+  width: 20%;
+  height: 20%;
+  object-fit: cover;
+  border-radius: 30px;
+  position: relative;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.itemContainer{
+  margin: 10px;
+  background-color: 'pallete.primary.main';
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+.itemname{
+  color: 'secondary.main'
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 export interface MovieViewModel {
   title: string;
@@ -17,7 +17,7 @@ function App() {
 
   const request = axios.get(apiBaseUrl);
 
-  const [popularMovie, setPopularMovie] = useState({} as MovieViewModel);
+  const [popularMovies, setPopularMovies] = useState([] as MovieViewModel[]);
 
   const getMoviePosterUrl = (posterPath: string) => {
     return imageUrl + posterPath;
@@ -25,23 +25,43 @@ function App() {
 
   useEffect(() => {
     const responseObj = request.then((response: any) => {
-      for (var i = 0; i < 5; i++) {
-        const results = response.data.results[i];
-
-        setPopularMovie(results);
-
-        console.log(results);
-      }
+      const slicedResults = response.data.results.slice(0, 5);
+      setPopularMovies(slicedResults);
     });
   }, []);
 
   return (
-    <div className="App">
-      <h1>Top movie</h1>
-      <h2> {popularMovie.title} </h2>
-      <img alt="text" src={getMoviePosterUrl(popularMovie.poster_path)} />
-      <h5> {popularMovie.overview}</h5>
-    </div>
+    <Box
+      sx={{
+        mt: "2",
+        width: "30%",
+        height: "100%",
+        padding: "16px",
+        flexWrap: "wrap",
+        color: "secondary.main",
+        backgroundColor: "text.primary",
+        "&:hover": {
+          backgroundColor: "primary.main",
+          opacity: [0.9, 0.8, 0.7],
+        },
+      }}
+      className="App"
+    >
+      <h1>Top movies</h1>
+
+      {popularMovies.map((item) => {
+        return (
+          <div className="itemContainer">
+            <h6 className="itemname">{item.title}</h6>{" "}
+            <img
+              src={getMoviePosterUrl(item.poster_path)}
+              className={"itemimage"}
+            />
+            <h6>{item.overview}</h6>
+          </div>
+        );
+      })}
+    </Box>
   );
 }
 
