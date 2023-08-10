@@ -1,0 +1,20 @@
+.itemimage{
+    width: 20%;
+    height: 20%;
+    object-fit: cover;
+    border-radius: 30px;
+    position: relative;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+  
+  .itemContainer{
+    margin: 10px;
+    background-color: 'primary.light';
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  
+  }
+  .itemname{
+    color: 'secondary.main'
+  }
