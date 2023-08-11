@@ -7,10 +7,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export interface BasicModalProps {
-  overview: string;
-  title: string;
-  poster_path: string;
-  id: any;
+  overview?: string;
+  title?: string;
+  poster_path?: string;
+  id?: any;
+  open: boolean;
 }
 
 export interface CreditsViewModel {
@@ -44,28 +45,27 @@ function BasicModal(props: BasicModalProps) {
   const [credits, setCredits] = useState([] as CreditsViewModel[]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
 
-  const toggleModal = () => {
-    setOpen(!open);
-  };
+  // const toggleModal = () => {
+  //   setOpen(!open);
+  // };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Overview</Button>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props?.open}
+        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         color="secondary.main"
       >
         <Box sx={style}>
-          <button className="close-modal" onClick={toggleModal}>
+          <Button className="close-modal">
             Close
-          </button>
+          </Button>
           <Typography
             id="modal-modal-title"
             variant="h2"
@@ -83,8 +83,8 @@ function BasicModal(props: BasicModalProps) {
             {props.overview}
           </Typography>
           <Typography sx={{ textAlign: "center", mt: 5 }}>
-            <img
-              src={getMoviePosterUrl(props.poster_path)}
+            <img alt="modal"
+              // src={getMoviePosterUrl(props.poster_path)}
               className={"itemimage"}
             />
           </Typography>

@@ -16,7 +16,11 @@ export interface CreditsViewModel {
   character: string;
 }
 
-function Widget() {
+export interface WidgetProps {
+  onOverviewButtonClick: () => void;
+}
+
+function Widget(props: WidgetProps) {
   const apiKey = "8166c415daae225e751570b50553e041";
   const apiBaseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200`;
 
@@ -43,6 +47,10 @@ function Widget() {
 
   console.log(popularMovies);
 
+  const handleButtonClick = () => {
+    props?.onOverviewButtonClick();
+  }
+
   return (
     <Box
       sx={{
@@ -67,23 +75,14 @@ function Widget() {
             <div className="itemContainer">
               <h4 className="itemname">{item.title}</h4>
 
-              <img
+              <img alt="movie img"
                 src={getMoviePosterUrl(item.poster_path)}
                 className={"itemimage"}
               />
               <div>
-                <Button variant="contained" onClick={onClick}>
+                <Button variant="contained" onClick={handleButtonClick}>
                   Πάτησε με!
                 </Button>
-              </div>
-
-              <div>
-                <BasicModal
-                  title={item.title}
-                  overview={item.overview}
-                  poster_path={item.poster_path}
-                  id={item.id}
-                />
               </div>
             </div>
           );
@@ -91,15 +90,9 @@ function Widget() {
         return (
           <div className="itemContainer">
             <h4 className="itemname">{item.title}</h4>
-
-            <div>
-              <BasicModal
-                title={item.title}
-                overview={item.overview}
-                poster_path={item.poster_path}
-                id={item.id}
-              />
-            </div>
+            <Button variant="contained" onClick={handleButtonClick}>
+                Πάτησε με!
+              </Button>
           </div>
         );
       })}
@@ -107,32 +100,3 @@ function Widget() {
   );
 }
 export default Widget;
-
-// const API_KEY = "8166c415daae225e751570b50553e041"; // Replace with your TMDb API key
-
-// function TopRatedMoviesWithCredits() {
-//   const [topRatedMovies, setTopRatedMovies] = useState([]);
-
-//   useEffect(() => {
-//     // Fetch top-rated movies
-//     axios
-//       .get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`)
-//       .then((response) => {
-//         setTopRatedMovies(response.data.results);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching top-rated movies:", error);
-//       });
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>Top Rated Movies with Credits</h1>
-//       <ul>
-//         {topRatedMovies.map((movie) => (
-//           <MovieWithCredits key={movie.id} movie={movie} />
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }

@@ -10,18 +10,29 @@ const useStyles = makeStyles((theme: { spacing: (arg0: number) => any }) => ({
   },
 }));
 
-function Button(onClick) {
-  const { text, size, color, variant, ...other } = onClick;
+export interface ButtonProps {
+  text: string;
+  size?: number | string | undefined;
+  color?: string | undefined;
+  variant?: string | undefined;
+  other?: any;
+
+  onClick?: any;
+}
+
+function Button(props: ButtonProps) {
+  const { text, size, color, variant, ...other } = props;
 
   return (
-    <Button
-      variant={variant || "contained"}
-      size={size || "large"}
-      color={color || "primary"}
-      onClick={onClick}
-    >
-      {text}
-    </Button>
+    // <Button
+    //   variant={variant || "contained"}
+    //   size={size || "large"}
+    //   color={color || "primary"}
+    //   onClick={onClick}
+    // >
+    //   {text}
+    // </Button>
+    <div></div>
   );
 }
 export default Button;
