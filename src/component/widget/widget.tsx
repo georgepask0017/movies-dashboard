@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BasicModal from "../popup/popup";
@@ -71,14 +71,19 @@ function Widget() {
                 src={getMoviePosterUrl(item.poster_path)}
                 className={"itemimage"}
               />
+              <div>
+                <Button variant="contained" onClick={onClick}>
+                  Πάτησε με!
+                </Button>
+              </div>
 
               <div>
-                {/* <BasicModal
+                <BasicModal
                   title={item.title}
                   overview={item.overview}
                   poster_path={item.poster_path}
                   id={item.id}
-                /> */}
+                />
               </div>
             </div>
           );
